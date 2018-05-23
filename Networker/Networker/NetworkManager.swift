@@ -6,29 +6,45 @@
 //  Copyright © 2018 EGEMEN AYHAN. All rights reserved.
 //
 
-import UIKit
 import Alamofire
+
+public enum NetworkError: Error {
+    case connectionError(Error)
+    case corruptedData
+}
 
 public class NetworkManager: NSObject {
 
     public static let shared = NetworkManager()
+    private let manager: SessionManager
     
-    public func run() {
-        print("Networking test run")
-        
-        Alamofire.request("https://httpbin.org/get").responseJSON { response in
-            print("Request: \(String(describing: response.request))")   // original url request
-            print("Response: \(String(describing: response.response))") // http url response
-            print("Result: \(response.result)")                         // response serialization result
-            
-            if let json = response.result.value {
-                print("JSON: \(json)") // serialized json response
+    override init() {
+        manager = SessionManager()
+    }
+    
+    @discardableResult public func execute<T: Codable>(_ request: Request,
+                                                       handler: @escaping (_ response: Response<T>) -> Void) -> URLSessionTask? {
+        let dataRequest = manager.request(request)
+        dataRequest.responseData { (dataResponse: DataResponse<Data>) in
+            let result: Result<T>
+            switch dataResponse.result {
+            case .success(let value):
+                if let object = T(jsonData: value) {
+                    result = .success(object)
+                } else {
+                    result = .failure(NetworkError.corruptedData)
+                }
+            case .failure(let error):
+                result = .failure(NetworkError.connectionError(error))
             }
             
-            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)") // original server data as UTF8 string
-            }
+            handler(Response<T>(request: dataResponse.request,
+                                response: dataResponse.response,
+                                data: dataResponse.data,
+                                result: result))
         }
+        
+        return dataRequest.task
     }
     
 }

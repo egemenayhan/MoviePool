@@ -8,11 +8,9 @@
 
 import Alamofire
 
-struct Response<Value: Codable>{
-    
+public struct Response<Value: Codable>{
     var request: URLRequest?
     var response: HTTPURLResponse?
     var data: Data?
     var result: Result<Value>
-    
 }

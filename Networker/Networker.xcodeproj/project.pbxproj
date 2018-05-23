@@ -14,6 +14,7 @@
 		A409E3D320B46E91007B7ED0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409E3D220B46E91007B7ED0 /* NetworkManager.swift */; };
 		A409E3DB20B49AA7007B7ED0 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409E3DA20B49AA7007B7ED0 /* Request.swift */; };
 		A409E3DD20B57B50007B7ED0 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409E3DC20B57B50007B7ED0 /* Response.swift */; };
+		A409E3E020B57F5D007B7ED0 /* Codable+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409E3DF20B57F5D007B7ED0 /* Codable+JSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		A409E3D220B46E91007B7ED0 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A409E3DA20B49AA7007B7ED0 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		A409E3DC20B57B50007B7ED0 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		A409E3DF20B57F5D007B7ED0 /* Codable+JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+JSON.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,9 +83,9 @@
 		A409E37920B46C17007B7ED0 /* Networker */ = {
 			isa = PBXGroup;
 			children = (
-				A409E3DE20B57E87007B7ED0 /* Extensions */,
 				A409E3D220B46E91007B7ED0 /* NetworkManager.swift */,
 				A409E3D920B49A86007B7ED0 /* NetworkModels */,
+				A409E3DE20B57E87007B7ED0 /* Extensions */,
 				A409E37A20B46C17007B7ED0 /* Networker.h */,
 				A409E37B20B46C17007B7ED0 /* Info.plist */,
 			);
@@ -119,6 +121,7 @@
 		A409E3DE20B57E87007B7ED0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A409E3DF20B57F5D007B7ED0 /* Codable+JSON.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A409E3E020B57F5D007B7ED0 /* Codable+JSON.swift in Sources */,
 				A409E3D320B46E91007B7ED0 /* NetworkManager.swift in Sources */,
 				A409E3DD20B57B50007B7ED0 /* Response.swift in Sources */,
 				A409E3DB20B49AA7007B7ED0 /* Request.swift in Sources */,
