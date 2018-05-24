@@ -8,6 +8,8 @@
 
 import Alamofire
 
+public typealias HTTPMethod = Alamofire.HTTPMethod
+
 private let BaseURL = URL(string: "https://api.themoviedb.org/3")!
 private let APIKey = "2696829a81b1b5827d515ff121700838"
 
@@ -18,11 +20,8 @@ public protocol Request: URLRequestConvertible {
 }
 
 extension Request {
-    
-    var method: HTTPMethod              { return .get }
-    var parameters: [String: Any]       { return [:] }
-    
-    func asURLRequest() throws -> URLRequest {
+        
+    public func asURLRequest() throws -> URLRequest {
         let url = BaseURL.appendingPathComponent(path)
         guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
                 fatalError("API URL can not be resolved.")

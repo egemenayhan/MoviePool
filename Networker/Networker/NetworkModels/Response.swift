@@ -6,11 +6,19 @@
 //  Copyright © 2018 EGEMEN AYHAN. All rights reserved.
 //
 
-import Alamofire
+public struct RawResponse {
+    public let request: URLRequest?
+    public let response: HTTPURLResponse?
+    public let data: Data?
+    public let error: Error?
+}
 
-public struct Response<Value: Codable>{
-    var request: URLRequest?
-    var response: HTTPURLResponse?
-    var data: Data?
-    var result: Result<Value>
+// MARK: - Response
+
+public protocol Response: RawDataMappable { }
+
+// MARK: - Mappable
+
+public protocol RawDataMappable {
+    init(jsonDict: [String: Any]) throws
 }
