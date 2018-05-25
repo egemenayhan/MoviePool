@@ -12,27 +12,122 @@ import OHHTTPStubs
 
 class NetworkerTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
         OHHTTPStubs.removeAllStubs()
     }
     
     func testTopMoviesRequest() {
-        setupRequestStub(type: .topMovies)
+        let expect = expectation(description: "Top movies request test")
+        setupTestStub(type: .topMovies)
         let request = TopMoviesRequest(forPage: 1)
         NetworkManager.shared.execute(request) { (result: Result<MoviePoolPage>) in
             switch (result) {
             case .success(let page):
-                XCTAssertEqual(1, page.currentPage, "MoviePoolPage current page is wrong. Should be '1'")
+                XCTAssertEqual(1, page.currentPage, "Page current page is wrong. Expected: 1")
+                XCTAssertEqual(3, page.movies.count, "Page movies count is wrong. Expected: 20")
             case .failure(let error):
                 XCTAssertNil(error, "Error occured! Reason: \(error.localizedDescription)")
             }
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { (error: Error?) in
+            print("Timeout Error: \(error.debugDescription)")
+        }
+    }
+    
+    func testSearchRequest() {
+        let expect = expectation(description: "Search request test")
+        setupTestStub(type: .search)
+        let request = SearchRequest(forPage: 1, keyword: "Deadpool")
+        NetworkManager.shared.execute(request) { (result: Result<MoviePoolPage>) in
+            switch (result) {
+            case .success(let page):
+                XCTAssertEqual(1, page.currentPage, "Page current page is wrong. Expected: 1")
+                XCTAssertEqual(3, page.movies.count, "Page movies count is wrong. Expected 7")
+            case .failure(let error):
+                XCTAssertNil(error, "Error occured! Reason: \(error.localizedDescription)")
+            }
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { (error: Error?) in
+            print("Timeout Error: \(error.debugDescription)")
+        }
+    }
+    
+    func testMissingFieldsResponse() {
+        let expect = expectation(description: "Missing movie fields test")
+        setupTestStub(type: .missingMovieFields)
+        // Request doesn`t matter because stub is important for us.
+        let request = SearchRequest(forPage: 1, keyword: "Deadpool")
+        NetworkManager.shared.execute(request) { (result: Result<MoviePoolPage>) in
+            switch (result) {
+            case .success(let page):
+                XCTAssertEqual(1, page.currentPage, "Page current page is wrong. Expected: 1")
+                XCTAssertEqual(1, page.movies.count, "Page movies count is wrong. Expected 1")
+            case .failure(let error):
+                XCTAssertNil(error, "Error occured! Reason: \(error.localizedDescription)")
+            }
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { (error: Error?) in
+            print("Timeout Error: \(error.debugDescription)")
+        }
+    }
+    
+    func testMappingFailResponse() {
+        let expect = expectation(description: "Mapping fail test")
+        setupTestStub(type: .mappingFail)
+        // Request doesn`t matter because stub is important for us.
+        let request = SearchRequest(forPage: 1, keyword: "Deadpool")
+        NetworkManager.shared.execute(request) { (result: Result<MoviePoolPage>) in
+            switch (result) {
+            case .success(_):
+                XCTFail("Should return error!")
+            case .failure(let error):
+                if let error = error as? NetworkManagerError {
+                    switch error {
+                    case .mappingFailed:
+                        XCTAssert(true)
+                    default:
+                        XCTFail("Error should be mappingFailed")
+                    }
+                } else {
+                    XCTFail("Error should be NetworkManagerError type")
+                }
+            }
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { (error: Error?) in
+            print("Timeout Error: \(error.debugDescription)")
+        }
+    }
+    
+    func testCorruptedDataResponse() {
+        let expect = expectation(description: "Corrupted data test")
+        setupTestStub(type: .corrupted)
+        // Request doesn`t matter because stub is important for us.
+        let request = SearchRequest(forPage: 1, keyword: "Deadpool")
+        NetworkManager.shared.execute(request) { (result: Result<MoviePoolPage>) in
+            switch result {
+            case .success(_):
+                XCTFail("Should return error!")
+            case .failure(let error):
+                if let error = error as? NetworkManagerError {
+                    switch (error) {
+                    case .connectionError(_):
+                        XCTAssert(true)
+                    default:
+                        XCTFail("Error should be connectionError case:\(error.localizedDescription)")
+                    }
+                } else {
+                    XCTFail("Error should be NetworkManagerError type")
+                }
+            }
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { (error: Error?) in
+            print("Timeout Error: \(error.debugDescription)")
         }
     }
     
@@ -40,14 +135,17 @@ class NetworkerTests: XCTestCase {
 
 private extension NetworkerTests {
     
-    enum RequestType: String {
+    enum TestStubType: String {
         case topMovies = "TopMovies"
         case search = "Search"
+        case missingMovieFields = "MissingMovieFields"
+        case mappingFail = "MappingFail"
+        case corrupted = "Corrupted"
     }
     
-    func setupRequestStub(type requestType: RequestType) {
+    func setupTestStub(type stubType: TestStubType) {
         stub(condition: isHost(BaseURL.host!)) { _ in
-            let stubFilePath = requestType.rawValue + ".json"
+            let stubFilePath = stubType.rawValue + ".json"
             let stubPath = OHPathForFile(stubFilePath, type(of: self))
             return fixture(filePath: stubPath!, headers: ["Content-Type":"application/json"])
         }
