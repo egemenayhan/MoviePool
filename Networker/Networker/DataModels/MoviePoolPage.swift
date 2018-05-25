@@ -27,7 +27,7 @@ extension MoviePoolPage: Unboxable {
         currentPage = try unboxer.unbox(key: "page")
         totalResults = try unboxer.unbox(key: "total_results")
         totalPage = try unboxer.unbox(key: "total_pages")
-        movies = try unboxer.unbox(key: "results")
+        movies = try unboxer.unbox(key: "results", allowInvalidElements: true)
     }
     
 }
