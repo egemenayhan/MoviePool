@@ -20,17 +20,36 @@ class NetworkerTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        OHHTTPStubs.removeAllStubs()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testTopMoviesRequest() {
+        setupRequestStub(type: .topMovies)
+        let request = TopMoviesRequest(forPage: 1)
+        NetworkManager.shared.execute(request) { (result: Result<MoviePoolPage>) in
+            switch (result) {
+            case .success(let page):
+                XCTAssertEqual(1, page.currentPage, "MoviePoolPage current page is wrong. Should be '1'")
+            case .failure(let error):
+                XCTAssertNil(error, "Error occured! Reason: \(error.localizedDescription)")
+            }
+        }
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+}
+
+private extension NetworkerTests {
+    
+    enum RequestType: String {
+        case topMovies = "TopMovies"
+        case search = "Search"
+    }
+    
+    func setupRequestStub(type requestType: RequestType) {
+        stub(condition: isHost(BaseURL.host!)) { _ in
+            let stubFilePath = requestType.rawValue + ".json"
+            let stubPath = OHPathForFile(stubFilePath, type(of: self))
+            return fixture(filePath: stubPath!, headers: ["Content-Type":"application/json"])
         }
     }
     
