@@ -14,9 +14,10 @@
 		A409E3A820B46C72007B7ED0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A409E3A620B46C72007B7ED0 /* LaunchScreen.storyboard */; };
 		A409E3B320B46C72007B7ED0 /* MoviePoolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409E3B220B46C72007B7ED0 /* MoviePoolTests.swift */; };
 		A409E3BE20B46C72007B7ED0 /* MoviePoolUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409E3BD20B46C72007B7ED0 /* MoviePoolUITests.swift */; };
-		A409E3D020B46E02007B7ED0 /* Networker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A409E3CF20B46E02007B7ED0 /* Networker.framework */; };
 		A409E3D720B4717D007B7ED0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A409E3D520B4717D007B7ED0 /* Crashlytics.framework */; };
 		A409E3D820B4717D007B7ED0 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A409E3D620B4717D007B7ED0 /* Fabric.framework */; };
+		A491B6F020B758E700574354 /* Networker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A409E3CF20B46E02007B7ED0 /* Networker.framework */; };
+		A491B6F120B758E700574354 /* Networker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A409E3CF20B46E02007B7ED0 /* Networker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,20 @@
 			remoteInfo = MoviePool;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A491B6F220B758E700574354 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A491B6F120B758E700574354 /* Networker.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A409E39A20B46C71007B7ED0 /* MoviePool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviePool.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,7 +76,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A409E3D720B4717D007B7ED0 /* Crashlytics.framework in Frameworks */,
-				A409E3D020B46E02007B7ED0 /* Networker.framework in Frameworks */,
+				A491B6F020B758E700574354 /* Networker.framework in Frameworks */,
 				A409E3D820B4717D007B7ED0 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,6 +172,7 @@
 				A409E39820B46C71007B7ED0 /* Resources */,
 				A409E3D120B46E22007B7ED0 /* Carthage */,
 				A409E3D420B47132007B7ED0 /* Crashlytics */,
+				A491B6F220B758E700574354 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

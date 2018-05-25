@@ -15,10 +15,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let request = TopMoviesRequest(forPage: 1)
-        NetworkManager.shared.execute(request) { (result: Result<PaginatedResponse>) in
+        NetworkManager.shared.execute(request) { (result: Result<MoviePoolPage>) in
             switch (result) {
             case .success(let page):
-                print("Page: \(page.page.currentPage)")
+                print("Page: \(page.currentPage)")
             case .failure(let error):
                 print(error.localizedDescription)
             }

@@ -7,6 +7,7 @@
 //
 
 import Alamofire
+import Unbox
 #if DEBUG
 import Reqres
 #endif
@@ -32,7 +33,7 @@ public class NetworkManager: NSObject {
     }
     
     @discardableResult public func execute<T>(_ request: Request,
-                                              completion: @escaping (_ response: Result<T>) -> Void) -> URLSessionTask? where T: RawDataMappable {
+                                              completion: @escaping (_ response: Result<T>) -> Void) -> URLSessionTask? where T: Unboxable {
         let dataRequest = manager.request(request)
         dataRequest.responseJSON { (dataResponse: DataResponse<Any>) in
             let result: Result<T>
@@ -42,7 +43,8 @@ public class NetworkManager: NSObject {
             case .success(let value):
                 if let JSON = value as? [String: Any] {
                     do {
-                        let object = try T(jsonDict: JSON)
+                        let unboxer = Unboxer(dictionary: JSON)
+                        let object = try T(unboxer: unboxer)
                         result = .success(object)
                     } catch {
                         result = .failure(NetworkManagerError.mappingFailed)
