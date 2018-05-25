@@ -10,11 +10,11 @@ import Unbox
 
 public struct Movie {
     
-    var id: Int
-    var title: String = "No Title"
-    var posterPath: String?
-    var overview: String?
-    var releaseDate: Date?
+    public var id: Int
+    public var title: String = "No Title"
+    public var overview: String?
+    public var releaseDate: Date?
+    fileprivate(set) var posterPath: String?
     
     private let BaseImagePath = "http://image.tmdb.org/t/p"
     
