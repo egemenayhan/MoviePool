@@ -1,3 +1,4 @@
 github "AckeeCZ/Reqres" "2.1.1"
 github "Alamofire/Alamofire" "4.7.2"
+github "AliSoftware/OHHTTPStubs" "6.1.0"
 github "johnsundell/unbox" "3.0.0"

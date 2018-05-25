@@ -1,3 +1,4 @@
 github "Alamofire/Alamofire" ~> 4.7
 github "johnsundell/unbox"
 github "AckeeCZ/Reqres"
+github "AliSoftware/OHHTTPStubs"
