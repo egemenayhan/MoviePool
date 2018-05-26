@@ -17,25 +17,6 @@ class NetworkerTests: XCTestCase {
         OHHTTPStubs.removeAllStubs()
     }
     
-    func testTopMoviesRequest() {
-        let expect = expectation(description: "Top movies request test")
-        setupTestStub(type: .topMovies)
-        let request = TopMoviesRequest(forPage: 1)
-        NetworkManager.shared.execute(request) { (result: Result<MoviePoolPage>) in
-            switch (result) {
-            case .success(let page):
-                XCTAssertEqual(1, page.currentPage, "Page current page is wrong. Expected: 1")
-                XCTAssertEqual(3, page.movies.count, "Page movies count is wrong. Expected: 20")
-            case .failure(let error):
-                XCTAssertNil(error, "Error occured! Reason: \(error.localizedDescription)")
-            }
-            expect.fulfill()
-        }
-        waitForExpectations(timeout: 1.0) { (error: Error?) in
-            print("Timeout Error: \(error.debugDescription)")
-        }
-    }
-    
     func testSearchRequest() {
         let expect = expectation(description: "Search request test")
         setupTestStub(type: .search)
@@ -136,7 +117,6 @@ class NetworkerTests: XCTestCase {
 private extension NetworkerTests {
     
     enum TestStubType: String {
-        case topMovies = "TopMovies"
         case search = "Search"
         case missingMovieFields = "MissingMovieFields"
         case mappingFail = "MappingFail"
