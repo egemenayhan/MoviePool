@@ -8,6 +8,7 @@
 
 import XCTest
 import OHHTTPStubs
+import Unbox
 @testable import Networker
 
 class NetworkerTests: XCTestCase {
@@ -112,6 +113,38 @@ class NetworkerTests: XCTestCase {
         }
     }
     
+    func testMoviePoolModel() {
+        if let JSON = readJSONFromFile(resource: TestStubType.search) {
+            do {
+                let unboxer = Unboxer(dictionary: JSON)
+                let page = try MoviePoolPage(unboxer: unboxer)
+                
+                XCTAssertEqual(1, page.currentPage, "Page current page is wrong. Expected: 1")
+                XCTAssertEqual(3, page.movies.count, "Page movies count is wrong. Expected 3")
+            } catch {
+                XCTFail("Error occured while unboxing object!")
+            }
+        } else {
+            XCTFail("Couldn`t find json file.")
+        }
+    }
+    
+    func testMovieModel() {
+        if let JSON = readJSONFromFile(resource: TestStubType.movie) {
+            do {
+                let unboxer = Unboxer(dictionary: JSON)
+                let movie = try Movie(unboxer: unboxer)
+                
+                XCTAssertEqual(999, movie.id, "Movie id parsed wrong. Expected: 999")
+                XCTAssertEqual("Deadpool 2", movie.title, "Movie title parsed wrong. Expected Deadpool 2")
+            } catch {
+                XCTFail("Error occured while unboxing object!")
+            }
+        } else {
+            XCTFail("Couldn`t find json file.")
+        }
+    }
+    
 }
 
 private extension NetworkerTests {
@@ -121,6 +154,7 @@ private extension NetworkerTests {
         case missingMovieFields = "MissingMovieFields"
         case mappingFail = "MappingFail"
         case corrupted = "Corrupted"
+        case movie = "Movie"
     }
     
     func setupTestStub(type stubType: TestStubType) {
@@ -128,6 +162,24 @@ private extension NetworkerTests {
             let stubFilePath = stubType.rawValue + ".json"
             let stubPath = OHPathForFile(stubFilePath, type(of: self))
             return fixture(filePath: stubPath!, headers: ["Content-Type":"application/json"])
+        }
+    }
+    
+    func readJSONFromFile(resource: TestStubType) -> [String: Any]? {
+        if let path = Bundle(for: NetworkerTests.self).path(forResource: resource.rawValue, ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                if let jsonResult = jsonResult as? [String: Any] {
+                    return jsonResult
+                } else {
+                    return nil
+                }
+            } catch {
+                return nil
+            }
+        } else {
+            return nil
         }
     }
     

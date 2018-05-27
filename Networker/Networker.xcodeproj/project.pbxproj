@@ -23,6 +23,7 @@
 		A4258A3520B8C3E500A418C4 /* MissingMovieFields.json in Resources */ = {isa = PBXBuildFile; fileRef = A4258A3420B8C3E500A418C4 /* MissingMovieFields.json */; };
 		A4258A3720B8C75B00A418C4 /* MappingFail.json in Resources */ = {isa = PBXBuildFile; fileRef = A4258A3620B8C75B00A418C4 /* MappingFail.json */; };
 		A4258A3920B8CAC200A418C4 /* Corrupted.json in Resources */ = {isa = PBXBuildFile; fileRef = A4258A3820B8CAC200A418C4 /* Corrupted.json */; };
+		A4258A3B20B9644300A418C4 /* Movie.json in Resources */ = {isa = PBXBuildFile; fileRef = A4258A3A20B9644300A418C4 /* Movie.json */; };
 		A491B6D120B7377000574354 /* Reqres.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A491B6D020B7377000574354 /* Reqres.framework */; };
 		A491B6D320B7378600574354 /* Unbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A491B6D220B7378500574354 /* Unbox.framework */; };
 		A491B6E720B7396A00574354 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A491B6E020B7396A00574354 /* Movie.swift */; };
@@ -72,6 +73,7 @@
 		A4258A3420B8C3E500A418C4 /* MissingMovieFields.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MissingMovieFields.json; sourceTree = "<group>"; };
 		A4258A3620B8C75B00A418C4 /* MappingFail.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MappingFail.json; sourceTree = "<group>"; };
 		A4258A3820B8CAC200A418C4 /* Corrupted.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Corrupted.json; sourceTree = "<group>"; };
+		A4258A3A20B9644300A418C4 /* Movie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Movie.json; sourceTree = "<group>"; };
 		A491B6D020B7377000574354 /* Reqres.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reqres.framework; path = ../Vendor/Carthage/Build/iOS/Reqres.framework; sourceTree = "<group>"; };
 		A491B6D220B7378500574354 /* Unbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Unbox.framework; path = ../Vendor/Carthage/Build/iOS/Unbox.framework; sourceTree = "<group>"; };
 		A491B6E020B7396A00574354 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 		A4258A2820B8B88F00A418C4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A4258A3A20B9644300A418C4 /* Movie.json */,
 				A4258A3820B8CAC200A418C4 /* Corrupted.json */,
 				A4258A3620B8C75B00A418C4 /* MappingFail.json */,
 				A4258A3420B8C3E500A418C4 /* MissingMovieFields.json */,
@@ -301,6 +304,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4258A3B20B9644300A418C4 /* Movie.json in Resources */,
 				A4258A3720B8C75B00A418C4 /* MappingFail.json in Resources */,
 				A4258A3320B8C16400A418C4 /* Search.json in Resources */,
 				A4258A3520B8C3E500A418C4 /* MissingMovieFields.json in Resources */,
