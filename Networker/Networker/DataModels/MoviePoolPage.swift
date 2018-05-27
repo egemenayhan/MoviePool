@@ -15,7 +15,7 @@ public struct MoviePoolPage {
     public var totalPage: Int = 0
     public var movies: [Movie] = []
     
-    mutating func nextPage() -> Int? {
+    public func nextPage() -> Int? {
         return currentPage < totalPage ? (currentPage + 1) : nil
     }
     

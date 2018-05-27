@@ -12,6 +12,7 @@ class SearchViewController: UIViewController {
 
     fileprivate(set) var searchBar = UISearchBar()
     fileprivate let model = SearchViewModel()
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,14 +29,21 @@ private extension SearchViewController {
         
         self.navigationItem.titleView = searchBar
         searchBar.delegate = self
+        
+        tableView.tableFooterView = UIView(frame: .zero)
     }
     
     func handleStateChange(change: SearchState.Change) {
-        
+        switch change {
+        case .fetchStateChanged:
+            fallthrough
+        case .resultsUpdated:
+            tableView.reloadData()
+        }
     }
     
     func handleError(error: SearchState.StateError) {
-        
+        // TODO: handle error
     }
     
 }
@@ -44,6 +52,10 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        if let key = searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
+            model.search(key)
+            searchBar.text = key
+        }
     }
     
 }
@@ -72,7 +84,19 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = model.state.results[indexPath.row].title
+        return cell
+    }
+    
+}
+
+extension SearchViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == model.state.results.count - 10 {
+            model.fetchNextPage()
+        }
     }
     
 }
