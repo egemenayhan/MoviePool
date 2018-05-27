@@ -25,7 +25,7 @@ class NetworkerTests: XCTestCase {
             switch (result) {
             case .success(let page):
                 XCTAssertEqual(1, page.currentPage, "Page current page is wrong. Expected: 1")
-                XCTAssertEqual(3, page.movies.count, "Page movies count is wrong. Expected 7")
+                XCTAssertEqual(3, page.movies.count, "Page movies count is wrong. Expected 3")
             case .failure(let error):
                 XCTAssertNil(error, "Error occured! Reason: \(error.localizedDescription)")
             }
