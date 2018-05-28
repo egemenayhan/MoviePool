@@ -43,6 +43,12 @@ struct SearchState {
         return .resultsUpdated
     }
     
+    mutating func updateResults(movies: [Movie]) -> Change {
+        self.results = movies
+        
+        return .resultsUpdated
+    }
+    
 }
 
 class SearchViewModel: NSObject {
@@ -52,6 +58,7 @@ class SearchViewModel: NSObject {
     var errorHandler: ((SearchState.StateError)->())?
     
     func search(_ key: String) {
+        stateChangeHandler?(state.updateFetchigState(fetching: true))
         let request = SearchRequest(forPage: 1, keyword: key)
         NetworkManager.shared.execute(request) { [weak self] (result: Result<MoviePoolPage>) in
             guard let strongSelf = self else { return }
@@ -95,6 +102,10 @@ class SearchViewModel: NSObject {
             
             strongSelf.stateChangeHandler?(strongSelf.state.updateFetchigState(fetching: false))
         }
+    }
+    
+    func clearMovies() {
+        stateChangeHandler?(state.updateResults(movies: []))
     }
     
 }

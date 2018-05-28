@@ -24,27 +24,28 @@ class SearchViewController: UIViewController {
 private extension SearchViewController {
     
     struct Const {
-        static let estimatedRowHeight: CGFloat = 112.0
+        static let movieRowHeight: CGFloat = 112.0
+        static let fetchingRowHeight: CGFloat = 50.0
+        static let fetchingCellIdentifier = "fetchingCell"
     }
     
     func setupUI() {
         model.stateChangeHandler = handleStateChange
         model.errorHandler = handleError
         
+        searchBar.placeholder = "Tap here to search a movie"
         self.navigationItem.titleView = searchBar
         searchBar.delegate = self
         
         tableView.tableFooterView = UIView(frame: .zero)
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = Const.estimatedRowHeight
     }
     
     func handleStateChange(change: SearchState.Change) {
         switch change {
         case .fetchStateChanged:
-            fallthrough
+            tableView.reloadSections(IndexSet(integer: SearchSection.fetching.rawValue), with: .automatic)
         case .resultsUpdated:
-            tableView.reloadData()
+            tableView.reloadSections(IndexSet(integer: SearchSection.movies.rawValue), with: .automatic)
         }
     }
     
@@ -59,6 +60,7 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if let key = searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
+            model.clearMovies()
             model.search(key)
             searchBar.text = key
         }
@@ -85,7 +87,13 @@ extension SearchViewController: UITableViewDataSource {
         case .movies:
             return model.state.results.count
         case .fetching:
-            return model.state.fetching ? 1 : 0
+            if  model.state.fetching {
+                return 1
+            }
+            if let page = model.state.page, page.nextPage() != nil {
+                return 1
+            }
+            return 0
         }
     }
     
@@ -97,7 +105,8 @@ extension SearchViewController: UITableViewDataSource {
             cell.configure(with: model.state.results[indexPath.row])
             return cell
         case .fetching:
-            return UITableViewCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: Const.fetchingCellIdentifier, for: indexPath)
+            return cell
         }
     }
     
@@ -106,8 +115,32 @@ extension SearchViewController: UITableViewDataSource {
 extension SearchViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == model.state.results.count - 5 {
+        guard let section = SearchSection(rawValue: indexPath.section) else { fatalError("Undefined section index!") }
+        switch section {
+        case .fetching:
             model.fetchNextPage()
+        default:
+            return
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let section = SearchSection(rawValue: indexPath.section) else { fatalError("Undefined section index!") }
+        switch section {
+        case .movies:
+            return UITableViewAutomaticDimension
+        case .fetching:
+            return Const.fetchingRowHeight
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let section = SearchSection(rawValue: indexPath.section) else { fatalError("Undefined section index!") }
+        switch section {
+        case .movies:
+            return Const.movieRowHeight
+        case .fetching:
+            return Const.fetchingRowHeight
         }
     }
     
