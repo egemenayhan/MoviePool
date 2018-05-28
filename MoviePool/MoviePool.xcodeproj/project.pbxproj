@@ -183,9 +183,17 @@
 			children = (
 				A4258A3E20BB39DD00A418C4 /* SearchViewController.swift */,
 				A4258A4020BB3A5200A418C4 /* SearchViewModel.swift */,
-				A4258A4220BBEB1900A418C4 /* MovieTableViewCell.swift */,
+				A4258A4720BC063C00A418C4 /* Cells */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		A4258A4720BC063C00A418C4 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				A4258A4220BBEB1900A418C4 /* MovieTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

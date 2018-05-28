@@ -7,6 +7,7 @@
 //
 
 import Networker
+import Kingfisher
 
 class MovieTableViewCell: UITableViewCell {
 
@@ -21,6 +22,7 @@ class MovieTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         posterImageView.layer.cornerRadius = 5.0
+        posterImageView.layer.masksToBounds = true
     }
     
     override func prepareForReuse() {
@@ -35,6 +37,9 @@ class MovieTableViewCell: UITableViewCell {
         titleLabel.text = movie.title
         releaseDateLabel.text = movie.formattedReleaseDate()
         overviewLabel.text = movie.overview
+        let posterResource = movie.imageURL(forSize: .w185)
+        posterImageView.kf.setImage(with: posterResource,
+                                    placeholder: Image(named: "placeholder"))
     }
 
 }
