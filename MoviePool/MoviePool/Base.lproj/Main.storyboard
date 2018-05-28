@@ -102,6 +102,7 @@
                                             <outlet property="overviewLabel" destination="H0s-lk-gmC" id="q2x-A6-cks"/>
                                             <outlet property="posterImageView" destination="nbY-2s-hKg" id="z0t-9J-qgY"/>
                                             <outlet property="releaseDateLabel" destination="Akl-6r-90j" id="QdF-cj-l0N"/>
+                                            <outlet property="releaseDateStackView" destination="7ZT-Dr-sGT" id="jch-2W-qex"/>
                                             <outlet property="titleLabel" destination="Chx-bh-Jds" id="Tj7-Lw-0fq"/>
                                         </connections>
                                     </tableViewCell>

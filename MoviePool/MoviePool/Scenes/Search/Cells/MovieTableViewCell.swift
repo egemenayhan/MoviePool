@@ -13,6 +13,7 @@ class MovieTableViewCell: UITableViewCell {
 
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var releaseDateStackView: UIStackView!
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
     
@@ -28,15 +29,28 @@ class MovieTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLabel.text = nil
-        releaseDateLabel.text = nil
-        overviewLabel.text = nil
         posterImageView.image = nil
+        
+        releaseDateLabel.text = nil
+        releaseDateStackView.isHidden = true
+        
+        overviewLabel.text = nil
+        overviewLabel.isHidden = true
     }
     
     func configure(with movie:Movie) {
         titleLabel.text = movie.title
-        releaseDateLabel.text = movie.formattedReleaseDate()
-        overviewLabel.text = movie.overview
+        
+        if let releaseDate = movie.formattedReleaseDate() {
+            releaseDateLabel.text = releaseDate
+            releaseDateStackView.isHidden = false
+        }
+        
+        if let overview = movie.overview {
+            overviewLabel.text = overview
+            overviewLabel.isHidden = false
+        }
+        
         let posterResource = movie.imageURL(forSize: .w185)
         posterImageView.kf.setImage(with: posterResource,
                                     placeholder: Image(named: "placeholder"))
