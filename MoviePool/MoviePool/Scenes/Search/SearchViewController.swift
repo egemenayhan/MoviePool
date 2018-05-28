@@ -50,7 +50,19 @@ private extension SearchViewController {
     }
     
     func handleError(error: SearchState.StateError) {
-        // TODO: handle error
+        var errorMessage = ""
+        
+        switch error {
+        case .resultNotFound:
+            errorMessage = "Sorry, we can`t find any movie"
+        case .networkError(_):
+            errorMessage = "Network error occured please try again later"
+        }
+        
+        let alertVC = UIAlertController(title: "Oops!", message: errorMessage, preferredStyle: .alert)
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+        alertVC.addAction(dismissAction)
+        present(alertVC, animated: true, completion: nil)
     }
     
 }
