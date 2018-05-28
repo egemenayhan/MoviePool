@@ -10,7 +10,7 @@ import Alamofire
 
 public typealias HTTPMethod = Alamofire.HTTPMethod
 
-let BaseURL = URL(string: "https://api.themoviedb.org/3")!
+public let BaseURL = URL(string: "https://api.themoviedb.org/3")!
 private let APIKey = "2696829a81b1b5827d515ff121700838"
 
 public protocol Request: URLRequestConvertible {

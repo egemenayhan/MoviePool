@@ -7,29 +7,55 @@
 //
 
 import XCTest
+import OHHTTPStubs
+import Networker
 @testable import MoviePool
 
 class MoviePoolTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        OHHTTPStubs.removeAllStubs()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testSearch() {
+        let expect = expectation(description: " test")
+        setupTestStub(type: .search)
+        let model = SearchViewModel()
+        model.stateChangeHandler = { (change: SearchState.Change) in
+            switch change {
+            case .resultsUpdated:
+                if let page = model.state.page {
+                    XCTAssertEqual(1, page.currentPage, "Current page is wrong. Expected: 1")
+                    XCTAssertEqual(3, page.movies.count, "Movie count is wrong. Expected: 3")
+                } else {
+                    XCTFail("Page should not be nil!")
+                }
+                expect.fulfill()
+            default:
+                return
+            }
+        }
+        model.search("deadpool")
+        waitForExpectations(timeout: 1.0) { (error: Error?) in
+            print("Timeout Error: \(error.debugDescription)")
+        }
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+}
+
+private extension MoviePoolTests {
+    
+    enum TestStubType: String {
+        case search = "Search"
+    }
+    
+    func setupTestStub(type stubType: TestStubType) {
+        stub(condition: isHost(Networker.BaseURL.host!)) { _ in
+            let stubFilePath = stubType.rawValue + ".json"
+            let stubPath = OHPathForFile(stubFilePath, type(of: self))
+            return fixture(filePath: stubPath!, headers: ["Content-Type":"application/json"])
         }
     }
     
