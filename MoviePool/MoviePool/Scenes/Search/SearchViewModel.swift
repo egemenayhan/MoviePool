@@ -21,6 +21,7 @@ struct SearchState {
     }
     
     enum StateError {
+        case emptySearchKeyword
         case resultNotFound
         case networkError(Error)
     }
@@ -58,6 +59,11 @@ class SearchViewModel: NSObject {
     var errorHandler: ((SearchState.StateError)->())?
     
     func search(_ key: String) {
+        
+        if !(key.count > 0) {
+            errorHandler?(.emptySearchKeyword)
+            return
+        }
         stateChangeHandler?(state.updateFetchigState(fetching: true))
         let request = SearchRequest(forPage: 1, keyword: key)
         NetworkManager.shared.execute(request) { [weak self] (result: Result<MoviePoolPage>) in
@@ -72,9 +78,8 @@ class SearchViewModel: NSObject {
                 } else {
                     strongSelf.errorHandler?(.resultNotFound)
                 }
-            case .failure(_):
-                // TODO: handle error
-                break
+            case .failure(let error):
+                strongSelf.errorHandler?(.networkError(error))
             }
             
             strongSelf.stateChangeHandler?(strongSelf.state.updateFetchigState(fetching: false))
@@ -95,9 +100,8 @@ class SearchViewModel: NSObject {
             case .success(let page):
                 let change = strongSelf.state.updatePage(page: page, isNextPage: true)
                 strongSelf.stateChangeHandler?(change)
-            case .failure(_):
-                // TODO: handle error
-                break
+            case .failure(let error):
+                strongSelf.errorHandler?(.networkError(error))
             }
             
             strongSelf.stateChangeHandler?(strongSelf.state.updateFetchigState(fetching: false))

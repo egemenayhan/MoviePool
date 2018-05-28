@@ -53,8 +53,10 @@ private extension SearchViewController {
         var errorMessage = ""
         
         switch error {
+        case .emptySearchKeyword:
+            errorMessage = "Invalid search keyword!"
         case .resultNotFound:
-            errorMessage = "Sorry, we can`t find any movie"
+            errorMessage = "Sorry, we can`t find any movie in the pool"
         case .networkError(_):
             errorMessage = "Network error occured please try again later"
         }
