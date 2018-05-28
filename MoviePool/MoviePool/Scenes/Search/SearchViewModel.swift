@@ -11,9 +11,15 @@ import Networker
 struct SearchState {
     private(set) var page: MoviePoolPage?
     private(set) var results: [Movie] = []
-    private(set) var suggestions: [String] = []
+    private(set) var suggestions = RecentSearchesManager.shared.recents
     private(set) var fetching = false
-    fileprivate(set) var activeKeyword: String?
+    fileprivate(set) var activeKeyword: String? {
+        didSet {
+            if let keyword = activeKeyword {
+                RecentSearchesManager.shared.addKeyword(keyword)
+            }
+        }
+    }
     
     enum Change {
         case resultsUpdated
