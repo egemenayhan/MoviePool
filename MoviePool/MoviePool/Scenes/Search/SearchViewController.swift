@@ -23,6 +23,10 @@ class SearchViewController: UIViewController {
 
 private extension SearchViewController {
     
+    struct Const {
+        static let estimatedRowHeight: CGFloat = 112.0
+    }
+    
     func setupUI() {
         model.stateChangeHandler = handleStateChange
         model.errorHandler = handleError
@@ -31,6 +35,8 @@ private extension SearchViewController {
         searchBar.delegate = self
         
         tableView.tableFooterView = UIView(frame: .zero)
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = Const.estimatedRowHeight
     }
     
     func handleStateChange(change: SearchState.Change) {
@@ -84,9 +90,15 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = model.state.results[indexPath.row].title
-        return cell
+        guard let section = SearchSection(rawValue: indexPath.section) else { fatalError("Undefined section index!") }
+        switch section {
+        case .movies:
+            let cell = tableView.dequeueReusableCell(withIdentifier: MovieTableViewCell.reuseIdentifier, for: indexPath) as! MovieTableViewCell
+            cell.configure(with: model.state.results[indexPath.row])
+            return cell
+        case .fetching:
+            return UITableViewCell()
+        }
     }
     
 }
@@ -94,7 +106,7 @@ extension SearchViewController: UITableViewDataSource {
 extension SearchViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == model.state.results.count - 10 {
+        if indexPath.row == model.state.results.count - 5 {
             model.fetchNextPage()
         }
     }

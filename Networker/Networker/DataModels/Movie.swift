@@ -18,13 +18,6 @@ public struct Movie {
     
     private let BaseImagePath = "http://image.tmdb.org/t/p"
     
-    // Helper
-    static func dateFormatter() -> DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY-MM-dd"
-        return formatter
-    }
-    
 }
 
 extension Movie: Unboxable {
@@ -39,6 +32,7 @@ extension Movie: Unboxable {
     
 }
 
+// Helpers
 extension Movie {
     
     public enum ImageSize: String {
@@ -48,9 +42,22 @@ extension Movie {
         case w780 = "/w780"
     }
     
+    static func dateFormatter() -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY-MM-dd"
+        return formatter
+    }
+    
     public func imageURL(forSize size:ImageSize) -> URL? {
         guard let posterPath = self.posterPath else { return nil }
         return URL(string: BaseImagePath + size.rawValue + posterPath)
+    }
+    
+    public func formattedReleaseDate() -> String? {
+        guard let releaseDate = releaseDate else { return nil }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.YYYY"
+        return formatter.string(from: releaseDate)
     }
     
 }

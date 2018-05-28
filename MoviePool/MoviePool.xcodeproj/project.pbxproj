@@ -17,6 +17,7 @@
 		A409E3D820B4717D007B7ED0 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A409E3D620B4717D007B7ED0 /* Fabric.framework */; };
 		A4258A3F20BB39DD00A418C4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4258A3E20BB39DD00A418C4 /* SearchViewController.swift */; };
 		A4258A4120BB3A5200A418C4 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4258A4020BB3A5200A418C4 /* SearchViewModel.swift */; };
+		A4258A4320BBEB1900A418C4 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4258A4220BBEB1900A418C4 /* MovieTableViewCell.swift */; };
 		A491B6F020B758E700574354 /* Networker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A409E3CF20B46E02007B7ED0 /* Networker.framework */; };
 		A491B6F120B758E700574354 /* Networker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A409E3CF20B46E02007B7ED0 /* Networker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -70,6 +71,7 @@
 		A409E3D620B4717D007B7ED0 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		A4258A3E20BB39DD00A418C4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		A4258A4020BB3A5200A418C4 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		A4258A4220BBEB1900A418C4 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 			children = (
 				A4258A3E20BB39DD00A418C4 /* SearchViewController.swift */,
 				A4258A4020BB3A5200A418C4 /* SearchViewModel.swift */,
+				A4258A4220BBEB1900A418C4 /* MovieTableViewCell.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 			files = (
 				A4258A4120BB3A5200A418C4 /* SearchViewModel.swift in Sources */,
 				A4258A3F20BB39DD00A418C4 /* SearchViewController.swift in Sources */,
+				A4258A4320BBEB1900A418C4 /* MovieTableViewCell.swift in Sources */,
 				A409E39E20B46C72007B7ED0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
