@@ -18,6 +18,8 @@
 		A4258A3F20BB39DD00A418C4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4258A3E20BB39DD00A418C4 /* SearchViewController.swift */; };
 		A4258A4120BB3A5200A418C4 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4258A4020BB3A5200A418C4 /* SearchViewModel.swift */; };
 		A4258A4320BBEB1900A418C4 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4258A4220BBEB1900A418C4 /* MovieTableViewCell.swift */; };
+		A4258A4520BC00A600A418C4 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4258A4420BC00A600A418C4 /* Kingfisher.framework */; };
+		A4258A4620BC00A600A418C4 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A4258A4420BC00A600A418C4 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A491B6F020B758E700574354 /* Networker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A409E3CF20B46E02007B7ED0 /* Networker.framework */; };
 		A491B6F120B758E700574354 /* Networker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A409E3CF20B46E02007B7ED0 /* Networker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -46,6 +48,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				A4258A4620BC00A600A418C4 /* Kingfisher.framework in Embed Frameworks */,
 				A491B6F120B758E700574354 /* Networker.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -72,6 +75,7 @@
 		A4258A3E20BB39DD00A418C4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		A4258A4020BB3A5200A418C4 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		A4258A4220BBEB1900A418C4 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
+		A4258A4420BC00A600A418C4 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,7 @@
 			files = (
 				A409E3D720B4717D007B7ED0 /* Crashlytics.framework in Frameworks */,
 				A491B6F020B758E700574354 /* Networker.framework in Frameworks */,
+				A4258A4520BC00A600A418C4 /* Kingfisher.framework in Frameworks */,
 				A409E3D820B4717D007B7ED0 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,6 +162,7 @@
 		A409E3CE20B46E02007B7ED0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4258A4420BC00A600A418C4 /* Kingfisher.framework */,
 				A409E3D520B4717D007B7ED0 /* Crashlytics.framework */,
 				A409E3D620B4717D007B7ED0 /* Fabric.framework */,
 				A409E3CF20B46E02007B7ED0 /* Networker.framework */,
