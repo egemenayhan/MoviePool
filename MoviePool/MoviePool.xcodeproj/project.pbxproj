@@ -12,16 +12,15 @@
 		A409E3A520B46C72007B7ED0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A409E3A420B46C72007B7ED0 /* Assets.xcassets */; };
 		A409E3A820B46C72007B7ED0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A409E3A620B46C72007B7ED0 /* LaunchScreen.storyboard */; };
 		A409E3B320B46C72007B7ED0 /* MoviePoolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A409E3B220B46C72007B7ED0 /* MoviePoolTests.swift */; };
-		A409E3D720B4717D007B7ED0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A409E3D520B4717D007B7ED0 /* Crashlytics.framework */; };
-		A409E3D820B4717D007B7ED0 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A409E3D620B4717D007B7ED0 /* Fabric.framework */; };
 		A4258A3F20BB39DD00A418C4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4258A3E20BB39DD00A418C4 /* SearchViewController.swift */; };
 		A4258A4120BB3A5200A418C4 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4258A4020BB3A5200A418C4 /* SearchViewModel.swift */; };
 		A4258A4320BBEB1900A418C4 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4258A4220BBEB1900A418C4 /* MovieTableViewCell.swift */; };
-		A4258A4520BC00A600A418C4 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4258A4420BC00A600A418C4 /* Kingfisher.framework */; };
-		A4258A4620BC00A600A418C4 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A4258A4420BC00A600A418C4 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A4258A4A20BC0E4C00A418C4 /* RecentSearchesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4258A4920BC0E4C00A418C4 /* RecentSearchesManager.swift */; };
 		A4258A5620BC9B9100A418C4 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A4258A5520BC9B9000A418C4 /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A4258A5920BCA3D000A418C4 /* Search.json in Resources */ = {isa = PBXBuildFile; fileRef = A4258A5820BCA3D000A418C4 /* Search.json */; };
+		A4258A5E20BCB32700A418C4 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4258A5D20BCB32700A418C4 /* Kingfisher.framework */; };
+		A4258A5F20BCB37D00A418C4 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4258A5D20BCB32700A418C4 /* Kingfisher.framework */; };
+		A4258A6020BCB37D00A418C4 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A4258A5D20BCB32700A418C4 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A491B6F020B758E700574354 /* Networker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A409E3CF20B46E02007B7ED0 /* Networker.framework */; };
 		A491B6F120B758E700574354 /* Networker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A409E3CF20B46E02007B7ED0 /* Networker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -53,7 +52,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A4258A4620BC00A600A418C4 /* Kingfisher.framework in Embed Frameworks */,
+				A4258A6020BCB37D00A418C4 /* Kingfisher.framework in Embed Frameworks */,
 				A491B6F120B758E700574354 /* Networker.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -72,15 +71,13 @@
 		A409E3B220B46C72007B7ED0 /* MoviePoolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePoolTests.swift; sourceTree = "<group>"; };
 		A409E3B420B46C72007B7ED0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A409E3CF20B46E02007B7ED0 /* Networker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Networker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A409E3D520B4717D007B7ED0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		A409E3D620B4717D007B7ED0 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		A4258A3E20BB39DD00A418C4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		A4258A4020BB3A5200A418C4 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		A4258A4220BBEB1900A418C4 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
-		A4258A4420BC00A600A418C4 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = "<group>"; };
 		A4258A4920BC0E4C00A418C4 /* RecentSearchesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchesManager.swift; sourceTree = "<group>"; };
 		A4258A5520BC9B9000A418C4 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = ../Vendor/Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		A4258A5820BCA3D000A418C4 /* Search.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Search.json; path = ../../../Networker/NetworkerTests/Resources/Search.json; sourceTree = "<group>"; };
+		A4258A5D20BCB32700A418C4 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Frameworks/Kingfisher.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,10 +85,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A409E3D720B4717D007B7ED0 /* Crashlytics.framework in Frameworks */,
+				A4258A5F20BCB37D00A418C4 /* Kingfisher.framework in Frameworks */,
 				A491B6F020B758E700574354 /* Networker.framework in Frameworks */,
-				A4258A4520BC00A600A418C4 /* Kingfisher.framework in Frameworks */,
-				A409E3D820B4717D007B7ED0 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4258A5E20BCB32700A418C4 /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,10 +147,8 @@
 		A409E3CE20B46E02007B7ED0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4258A5D20BCB32700A418C4 /* Kingfisher.framework */,
 				A4258A5520BC9B9000A418C4 /* OHHTTPStubs.framework */,
-				A4258A4420BC00A600A418C4 /* Kingfisher.framework */,
-				A409E3D520B4717D007B7ED0 /* Crashlytics.framework */,
-				A409E3D620B4717D007B7ED0 /* Fabric.framework */,
 				A409E3CF20B46E02007B7ED0 /* Networker.framework */,
 			);
 			name = Frameworks;
@@ -213,7 +207,6 @@
 				A409E39720B46C71007B7ED0 /* Frameworks */,
 				A409E39820B46C71007B7ED0 /* Resources */,
 				A409E3D120B46E22007B7ED0 /* Carthage */,
-				A409E3D420B47132007B7ED0 /* Crashlytics */,
 				A491B6F220B758E700574354 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -323,20 +316,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		A409E3D420B47132007B7ED0 /* Crashlytics */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Crashlytics;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0b8992bca59f35583dd2954856ac6a18c12d54b4 ab650f8211d5a1d5db7540e295bc8c82af50d9c80e2202edd8e623b12de724e2";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -515,6 +494,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = MoviePool/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -539,6 +519,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = MoviePool/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -560,7 +541,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YDABZ672Z5;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Vendor/Carthage/Build/iOS";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../Vendor/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = MoviePoolTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -582,7 +566,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YDABZ672Z5;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Vendor/Carthage/Build/iOS";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../Vendor/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = MoviePoolTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
