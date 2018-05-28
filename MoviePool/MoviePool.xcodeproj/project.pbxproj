@@ -133,13 +133,13 @@
 		A409E39C20B46C71007B7ED0 /* MoviePool */ = {
 			isa = PBXGroup;
 			children = (
-				A4258A4820BC0E0E00A418C4 /* Helpers */,
 				A409E39D20B46C72007B7ED0 /* AppDelegate.swift */,
 				A409E3A120B46C72007B7ED0 /* Main.storyboard */,
-				A4258A3C20BB37BF00A418C4 /* Scenes */,
 				A409E3A420B46C72007B7ED0 /* Assets.xcassets */,
 				A409E3A620B46C72007B7ED0 /* LaunchScreen.storyboard */,
 				A409E3A920B46C72007B7ED0 /* Info.plist */,
+				A4258A3C20BB37BF00A418C4 /* Scenes */,
+				A4258A4820BC0E0E00A418C4 /* Helpers */,
 			);
 			path = MoviePool;
 			sourceTree = "<group>";

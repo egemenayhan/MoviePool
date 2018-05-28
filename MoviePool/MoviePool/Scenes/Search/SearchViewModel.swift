@@ -69,11 +69,11 @@ class SearchViewModel: NSObject {
     var errorHandler: ((SearchState.StateError)->())?
     
     func search(_ key: String) {
-        
         if !(key.count > 0) {
             errorHandler?(.emptySearchKeyword)
             return
         }
+        
         stateChangeHandler?(state.updateFetchigState(fetching: true))
         let request = SearchRequest(forPage: 1, keyword: key)
         NetworkManager.shared.execute(request) { [weak self] (result: Result<MoviePoolPage>) in
