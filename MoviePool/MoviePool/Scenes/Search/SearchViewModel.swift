@@ -11,7 +11,6 @@ import Networker
 struct SearchState {
     private(set) var page: MoviePoolPage?
     private(set) var results: [Movie] = []
-    private(set) var suggestions = RecentSearchesManager.shared.recents
     private(set) var fetching = false
     fileprivate(set) var activeKeyword: String? {
         didSet {
@@ -50,10 +49,15 @@ struct SearchState {
         return .resultsUpdated
     }
     
-    mutating func updateResults(movies: [Movie]) -> Change {
-        self.results = movies
+    mutating func clearResults() -> Change {
+        page = nil
+        results = []
         
         return .resultsUpdated
+    }
+    
+    func suggestions() -> [String] {
+        return RecentSearchesManager.shared.recents
     }
     
 }
@@ -115,7 +119,7 @@ class SearchViewModel: NSObject {
     }
     
     func clearMovies() {
-        stateChangeHandler?(state.updateResults(movies: []))
+        stateChangeHandler?(state.clearResults())
     }
     
 }
