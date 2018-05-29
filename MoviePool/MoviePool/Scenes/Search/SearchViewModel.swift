@@ -22,6 +22,7 @@ struct SearchState {
     
     enum Change {
         case resultsUpdated
+        case nextPageFetched([IndexPath])
         case fetchStateChanged
     }
     
@@ -38,15 +39,23 @@ struct SearchState {
     }
     
     mutating func updatePage(page: MoviePoolPage, isNextPage: Bool) -> Change {
-        self.page = page
         
+        let totalResult = results.count + page.movies.count
         if isNextPage {
+            var indexPaths: [IndexPath] = []
+            for index in results.count..<totalResult {
+                indexPaths.append(IndexPath(row: index, section: SearchViewController.SearchSection.movies.rawValue))
+            }
+            self.page = page
             results.append(contentsOf: page.movies)
+            return .nextPageFetched(indexPaths)
         } else {
+            self.page = page
             results = page.movies
+            return .resultsUpdated
         }
         
-        return .resultsUpdated
+        
     }
     
     mutating func clearResults() -> Change {

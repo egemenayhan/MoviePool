@@ -50,6 +50,10 @@ private extension SearchViewController {
         switch change {
         case .fetchStateChanged:
             tableView.reloadSections(IndexSet(integer: SearchSection.fetching.rawValue), with: .automatic)
+        case .nextPageFetched(let indexPaths):
+            tableView.beginUpdates()
+            tableView.insertRows(at: indexPaths, with: .automatic)
+            tableView.endUpdates()
         case .resultsUpdated:
             tableView.reloadData()
         }
