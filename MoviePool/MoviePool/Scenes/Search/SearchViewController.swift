@@ -10,7 +10,7 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
-    private(set) var searchBar = UISearchBar()
+    private var searchBar = UISearchBar()
     private let model = SearchViewModel()
     private var loadingView: UIView!
     private var shouldShowSuggestions = false {

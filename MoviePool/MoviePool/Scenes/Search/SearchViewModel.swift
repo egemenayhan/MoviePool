@@ -9,6 +9,7 @@
 import Networker
 
 struct SearchState {
+    
     private var recentManager = RecentSearchesManager()
     private(set) var page: MoviePoolPage?
     private(set) var results: [Movie] = []
@@ -72,8 +73,7 @@ struct SearchState {
 
 class SearchViewModel: NSObject {
     
-    
-    fileprivate(set) var state = SearchState()
+    private(set) var state = SearchState()
     var stateChangeHandler: ((SearchState.Change)->())?
     var errorHandler: ((SearchState.StateError)->())?
     
@@ -129,17 +129,6 @@ class SearchViewModel: NSObject {
     
     func clearMovies() {
         stateChangeHandler?(state.clearResults())
-    }
-    
-    // Helper
-    func shouldShowLoading() -> Bool {
-        if state.fetching {
-            return true
-        }
-        if let page = state.page, page.nextPage() != nil {
-            return true
-        }
-        return false
     }
     
 }
