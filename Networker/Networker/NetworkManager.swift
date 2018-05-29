@@ -8,9 +8,6 @@
 
 import Alamofire
 import Unbox
-#if DEBUG
-import Reqres
-#endif
 
 public enum NetworkManagerError: Error {
     case connectionError(Error)
@@ -24,12 +21,7 @@ public class NetworkManager: NSObject {
     private let manager: SessionManager
     
     override init() {
-        #if DEBUG
-            let configuration = Reqres.defaultSessionConfiguration()
-            manager = SessionManager(configuration: configuration)
-        #else
             manager = SessionManager()
-        #endif
     }
     
     @discardableResult public func execute<T>(_ request: Request,

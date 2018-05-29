@@ -305,13 +305,11 @@
 			inputPaths = (
 				"$(SRCROOT)/../Vendor/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/../Vendor/Carthage/Build/iOS/Unbox.framework",
-				"$(SRCROOT)/../Vendor/Carthage/Build/iOS/Reqres.framework",
 			);
 			name = Carthage;
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Unbox.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Reqres.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
