@@ -11,20 +11,24 @@ import Unbox
 public struct Movie {
     
     public var id: Int
-    public var title: String = "No Title"
+    public var title: String
     public var overview: String?
     public var releaseDate: Date?
-    fileprivate(set) var posterPath: String?
+    private var posterPath: String?
     
+    // for image url
     private let BaseImagePath = "http://image.tmdb.org/t/p"
     
 }
 
+// Mapping
 extension Movie: Unboxable {
     
     public init(unboxer: Unboxer) throws {
+        // required
         id = try unboxer.unbox(key: "id")
         title = try unboxer.unbox(key: "title")
+        // optional
         overview = unboxer.unbox(key: "overview")
         posterPath = unboxer.unbox(key: "poster_path")
         releaseDate = unboxer.unbox(key: "release_date", formatter: Movie.dateFormatter())

@@ -10,6 +10,7 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
+    // MARK: - Properties
     private var searchBar = UISearchBar()
     private let model = SearchViewModel()
     private var loadingView: UIView!
@@ -20,6 +21,7 @@ class SearchViewController: UIViewController {
     }
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -41,6 +43,7 @@ private extension SearchViewController {
         static let suggestionCellIdentifier = "suggestionCell"
     }
     
+    // basic initializations for viewDidLoad
     func setupUI() {
         model.stateChangeHandler = handleStateChange
         model.errorHandler = handleError
@@ -54,6 +57,7 @@ private extension SearchViewController {
         setupLoadingView()
     }
     
+    // handling model state changes
     func handleStateChange(change: SearchState.Change) {
         switch change {
         case .showLoading(let show):
@@ -67,6 +71,7 @@ private extension SearchViewController {
         }
     }
     
+    // handling model errors
     func handleError(error: SearchState.StateError) {
         var errorMessage = ""
         
@@ -75,7 +80,6 @@ private extension SearchViewController {
             errorMessage = "Invalid search keyword!"
         case .resultNotFound:
             errorMessage = "Sorry, we can`t find any movie in the pool"
-            model.clearMovies()
         case .networkError(_):
             errorMessage = "Network error occured please try again later"
         }
@@ -89,7 +93,6 @@ private extension SearchViewController {
     func startSearch(_ keyword: String?) {
         searchBar.resignFirstResponder()
         if let key = keyword?.trimmingCharacters(in: .whitespacesAndNewlines) {
-            model.clearMovies()
             model.search(key)
             searchBar.text = key
         }
@@ -111,6 +114,7 @@ private extension SearchViewController {
     
 }
 
+// MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -127,6 +131,7 @@ extension SearchViewController: UISearchBarDelegate {
     
 }
 
+// MARK: - UITableViewDataSource
 extension SearchViewController: UITableViewDataSource {
     
     enum SearchSection:Int {
@@ -171,6 +176,7 @@ extension SearchViewController: UITableViewDataSource {
     
 }
 
+// MARK: - UITableViewDelegate
 extension SearchViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

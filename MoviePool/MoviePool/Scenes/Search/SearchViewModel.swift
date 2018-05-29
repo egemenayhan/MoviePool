@@ -8,6 +8,7 @@
 
 import Networker
 
+// MARK: - State
 struct SearchState {
     
     private var recentManager = RecentSearchesManager()
@@ -25,18 +26,20 @@ struct SearchState {
         }
     }
     
+    // changes are the states that view controller should handle. (kind of interface)
     enum Change {
         case resultsUpdated
         case nextPageFetched([IndexPath])
         case showLoading(Bool)
     }
-    
+    // possible error handlings
     enum StateError {
         case emptySearchKeyword
         case resultNotFound
         case networkError(Error)
     }
     
+    // mutating functions updates state and returns change for informing view controller
     mutating func updateFetchigState(fetching: Bool) -> Change {
         self.fetching = fetching
         
@@ -71,19 +74,24 @@ struct SearchState {
     
 }
 
+// MARK: - View Model
 class SearchViewModel: NSObject {
     
     private(set) var state = SearchState()
+    // handlers are used for update view controller about changes and errors on view model
     var stateChangeHandler: ((SearchState.Change)->())?
     var errorHandler: ((SearchState.StateError)->())?
     
+    // used on fetching new search key data
     func search(_ key: String) {
         if !(key.count > 0) {
             errorHandler?(.emptySearchKeyword)
+            stateChangeHandler?(state.clearResults())
             return
         }
         
         stateChangeHandler?(state.updateFetchigState(fetching: true))
+        stateChangeHandler?(state.clearResults())
         let request = SearchRequest(forPage: 1, keyword: key)
         NetworkManager.shared.execute(request) { [weak self] (result: Result<MoviePoolPage>) in
             guard let strongSelf = self else { return }
@@ -105,6 +113,7 @@ class SearchViewModel: NSObject {
         }
     }
     
+    // fetches next page on scrolling to page end
     func fetchNextPage() {
         guard state.fetching == false,
             let nextPage = state.page?.nextPage(),
@@ -125,10 +134,6 @@ class SearchViewModel: NSObject {
             
             strongSelf.stateChangeHandler?(strongSelf.state.updateFetchigState(fetching: false))
         }
-    }
-    
-    func clearMovies() {
-        stateChangeHandler?(state.clearResults())
     }
     
 }

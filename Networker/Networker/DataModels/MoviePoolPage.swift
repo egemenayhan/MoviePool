@@ -24,9 +24,10 @@ public struct MoviePoolPage {
 extension MoviePoolPage: Unboxable {
     
     public init(unboxer: Unboxer) throws {
+        // required
         currentPage = try unboxer.unbox(key: "page")
-        totalResults = try unboxer.unbox(key: "total_results")
         totalPage = try unboxer.unbox(key: "total_pages")
+        totalResults = try unboxer.unbox(key: "total_results")
         movies = try unboxer.unbox(key: "results", allowInvalidElements: true)
     }
     
