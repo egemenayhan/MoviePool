@@ -17,10 +17,10 @@
 		A4258A4320BBEB1900A418C4 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4258A4220BBEB1900A418C4 /* MovieTableViewCell.swift */; };
 		A4258A4A20BC0E4C00A418C4 /* RecentSearchesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4258A4920BC0E4C00A418C4 /* RecentSearchesManager.swift */; };
 		A4258A5620BC9B9100A418C4 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A4258A5520BC9B9000A418C4 /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A4258A5920BCA3D000A418C4 /* Search.json in Resources */ = {isa = PBXBuildFile; fileRef = A4258A5820BCA3D000A418C4 /* Search.json */; };
 		A4258A5E20BCB32700A418C4 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4258A5D20BCB32700A418C4 /* Kingfisher.framework */; };
 		A4258A5F20BCB37D00A418C4 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4258A5D20BCB32700A418C4 /* Kingfisher.framework */; };
 		A4258A6020BCB37D00A418C4 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A4258A5D20BCB32700A418C4 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A429D74D20BD849A00B5142B /* Search.json in Resources */ = {isa = PBXBuildFile; fileRef = A429D74C20BD849A00B5142B /* Search.json */; };
 		A491B6F020B758E700574354 /* Networker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A409E3CF20B46E02007B7ED0 /* Networker.framework */; };
 		A491B6F120B758E700574354 /* Networker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A409E3CF20B46E02007B7ED0 /* Networker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -76,8 +76,8 @@
 		A4258A4220BBEB1900A418C4 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		A4258A4920BC0E4C00A418C4 /* RecentSearchesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchesManager.swift; sourceTree = "<group>"; };
 		A4258A5520BC9B9000A418C4 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = ../Vendor/Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
-		A4258A5820BCA3D000A418C4 /* Search.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Search.json; path = ../../../Networker/NetworkerTests/Resources/Search.json; sourceTree = "<group>"; };
 		A4258A5D20BCB32700A418C4 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Frameworks/Kingfisher.framework; sourceTree = "<group>"; };
+		A429D74C20BD849A00B5142B /* Search.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Search.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +137,7 @@
 		A409E3B120B46C72007B7ED0 /* MoviePoolTests */ = {
 			isa = PBXGroup;
 			children = (
-				A4258A5720BCA2ED00A418C4 /* Resources */,
+				A429D74920BD830800B5142B /* Resources */,
 				A409E3B220B46C72007B7ED0 /* MoviePoolTests.swift */,
 				A409E3B420B46C72007B7ED0 /* Info.plist */,
 			);
@@ -188,10 +188,10 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		A4258A5720BCA2ED00A418C4 /* Resources */ = {
+		A429D74920BD830800B5142B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A4258A5820BCA3D000A418C4 /* Search.json */,
+				A429D74C20BD849A00B5142B /* Search.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -290,7 +290,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4258A5920BCA3D000A418C4 /* Search.json in Resources */,
+				A429D74D20BD849A00B5142B /* Search.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

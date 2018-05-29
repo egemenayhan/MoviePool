@@ -20,7 +20,7 @@ class MoviePoolTests: XCTestCase {
     }
     
     func testSearch() {
-        let expect = expectation(description: " test")
+        let expect = expectation(description: "Search test")
         setupTestStub(type: .search)
         let model = SearchViewModel()
         model.stateChangeHandler = { (change: SearchState.Change) in
@@ -29,16 +29,14 @@ class MoviePoolTests: XCTestCase {
                 if let page = model.state.page {
                     XCTAssertEqual(1, page.currentPage, "Current page is wrong. Expected: 1")
                     XCTAssertEqual(3, page.movies.count, "Movie count is wrong. Expected: 3")
-                } else {
-                    XCTFail("Page should not be nil!")
+                    expect.fulfill()
                 }
-                expect.fulfill()
             default:
                 return
             }
         }
         model.search("deadpool")
-        waitForExpectations(timeout: 1.0) { (error: Error?) in
+        waitForExpectations(timeout: 5.0) { (error: Error?) in
             print("Timeout Error: \(error.debugDescription)")
         }
     }
