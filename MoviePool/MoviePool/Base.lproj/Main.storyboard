@@ -94,7 +94,6 @@
                                                 <constraint firstItem="OlR-4c-2Gk" firstAttribute="trailing" secondItem="2ZG-nW-g0H" secondAttribute="trailingMargin" id="na2-Oa-2l3"/>
                                                 <constraint firstItem="nbY-2s-hKg" firstAttribute="leading" secondItem="2ZG-nW-g0H" secondAttribute="leadingMargin" id="oBn-L1-LcJ"/>
                                                 <constraint firstItem="OlR-4c-2Gk" firstAttribute="leading" secondItem="nbY-2s-hKg" secondAttribute="trailing" constant="8" id="rAB-Lz-knx"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="nbY-2s-hKg" secondAttribute="bottom" id="tyM-RG-Imi"/>
                                                 <constraint firstItem="nbY-2s-hKg" firstAttribute="top" secondItem="2ZG-nW-g0H" secondAttribute="topMargin" id="vGx-Ir-i4e"/>
                                             </constraints>
                                         </tableViewCellContentView>
