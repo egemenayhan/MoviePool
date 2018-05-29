@@ -23,7 +23,7 @@ struct SearchState {
     enum Change {
         case resultsUpdated
         case nextPageFetched([IndexPath])
-        case fetchStateChanged
+        case showLoading(Bool)
     }
     
     enum StateError {
@@ -35,11 +35,10 @@ struct SearchState {
     mutating func updateFetchigState(fetching: Bool) -> Change {
         self.fetching = fetching
         
-        return .fetchStateChanged
+        return .showLoading(fetching)
     }
     
     mutating func updatePage(page: MoviePoolPage, isNextPage: Bool) -> Change {
-        
         let totalResult = results.count + page.movies.count
         if isNextPage {
             var indexPaths: [IndexPath] = []
@@ -48,14 +47,14 @@ struct SearchState {
             }
             self.page = page
             results.append(contentsOf: page.movies)
+            
             return .nextPageFetched(indexPaths)
         } else {
             self.page = page
             results = page.movies
+            
             return .resultsUpdated
         }
-        
-        
     }
     
     mutating func clearResults() -> Change {
@@ -129,6 +128,17 @@ class SearchViewModel: NSObject {
     
     func clearMovies() {
         stateChangeHandler?(state.clearResults())
+    }
+    
+    // Helper
+    func shouldShowLoading() -> Bool {
+        if state.fetching {
+            return true
+        }
+        if let page = state.page, page.nextPage() != nil {
+            return true
+        }
+        return false
     }
     
 }

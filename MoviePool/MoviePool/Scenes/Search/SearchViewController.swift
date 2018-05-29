@@ -10,9 +10,10 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
-    fileprivate(set) var searchBar = UISearchBar()
-    fileprivate let model = SearchViewModel()
-    fileprivate var shouldShowSuggestions = false {
+    private(set) var searchBar = UISearchBar()
+    private let model = SearchViewModel()
+    private var loadingView: UIView!
+    private var shouldShowSuggestions = false {
         didSet {
             tableView.reloadData()
         }
@@ -23,6 +24,11 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        loadingView.center = tableView.center
+    }
 
 }
 
@@ -30,7 +36,7 @@ private extension SearchViewController {
     
     struct Const {
         static let movieRowHeight: CGFloat = 112.0
-        static let fetchingRowHeight: CGFloat = 50.0
+        static let suggestionRowHeight: CGFloat = 50.0
         static let fetchingCellIdentifier = "fetchingCell"
         static let suggestionCellIdentifier = "suggestionCell"
     }
@@ -44,15 +50,17 @@ private extension SearchViewController {
         searchBar.delegate = self
         
         tableView.tableFooterView = UIView(frame: .zero)
+        
+        setupLoadingView()
     }
     
     func handleStateChange(change: SearchState.Change) {
         switch change {
-        case .fetchStateChanged:
-            tableView.reloadSections(IndexSet(integer: SearchSection.fetching.rawValue), with: .automatic)
+        case .showLoading(let show):
+            loadingView.isHidden = !show
         case .nextPageFetched(let indexPaths):
             tableView.beginUpdates()
-            tableView.insertRows(at: indexPaths, with: .automatic)
+            tableView.insertRows(at: indexPaths, with: .none)
             tableView.endUpdates()
         case .resultsUpdated:
             tableView.reloadData()
@@ -87,6 +95,20 @@ private extension SearchViewController {
         }
     }
     
+    func setupLoadingView() {
+        loadingView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        loadingView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.6)
+        loadingView.layer.cornerRadius = 10
+        loadingView.layer.masksToBounds = true
+        loadingView.isHidden = true
+        view.addSubview(loadingView)
+        
+        let activity = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        activity.startAnimating()
+        activity.activityIndicatorViewStyle = .whiteLarge
+        loadingView.addSubview(activity)
+    }
+    
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -108,11 +130,10 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: UITableViewDataSource {
     
     enum SearchSection:Int {
-        static let count = 3
-        
         case suggestions
         case movies
-        case fetching
+        
+        static let count = 2
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -130,15 +151,6 @@ extension SearchViewController: UITableViewDataSource {
             if !shouldShowSuggestions {
                 return model.state.results.count
             }
-        case .fetching:
-            if !shouldShowSuggestions {
-                if  model.state.fetching {
-                    return 1
-                }
-                if let page = model.state.page, page.nextPage() != nil {
-                    return 1
-                }
-            }
         }
         return 0
     }
@@ -154,9 +166,6 @@ extension SearchViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: MovieTableViewCell.reuseIdentifier, for: indexPath) as! MovieTableViewCell
             cell.configure(with: model.state.results[indexPath.row])
             return cell
-        case .fetching:
-            let cell = tableView.dequeueReusableCell(withIdentifier: Const.fetchingCellIdentifier, for: indexPath)
-            return cell
         }
     }
     
@@ -167,8 +176,10 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let section = SearchSection(rawValue: indexPath.section) else { fatalError("Undefined section index!") }
         switch section {
-        case .fetching:
-            model.fetchNextPage()
+        case .movies:
+            if indexPath.row == (model.state.results.count - 1) {
+                model.fetchNextPage()
+            }
         default:
             return
         }
@@ -180,9 +191,7 @@ extension SearchViewController: UITableViewDelegate {
         case .movies:
             return UITableViewAutomaticDimension
         case .suggestions:
-            fallthrough
-        case .fetching:
-            return Const.fetchingRowHeight
+            return Const.suggestionRowHeight
         }
     }
     
@@ -192,9 +201,7 @@ extension SearchViewController: UITableViewDelegate {
         case .movies:
             return Const.movieRowHeight
         case .suggestions:
-            fallthrough
-        case .fetching:
-            return Const.fetchingRowHeight
+            return Const.suggestionRowHeight
         }
     }
     
