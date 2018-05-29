@@ -9,13 +9,17 @@
 import Networker
 
 struct SearchState {
+    private var recentManager = RecentSearchesManager()
     private(set) var page: MoviePoolPage?
     private(set) var results: [Movie] = []
     private(set) var fetching = false
+    var suggestions: [String] {
+        return recentManager.recents
+    }
     fileprivate(set) var activeKeyword: String? {
         didSet {
             if let keyword = activeKeyword {
-                RecentSearchesManager.shared.addKeyword(keyword)
+                recentManager.addKeyword(keyword)
             }
         }
     }
@@ -64,13 +68,10 @@ struct SearchState {
         return .resultsUpdated
     }
     
-    func suggestions() -> [String] {
-        return RecentSearchesManager.shared.recents
-    }
-    
 }
 
 class SearchViewModel: NSObject {
+    
     
     fileprivate(set) var state = SearchState()
     var stateChangeHandler: ((SearchState.Change)->())?

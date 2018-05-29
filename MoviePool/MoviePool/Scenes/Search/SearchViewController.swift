@@ -145,7 +145,7 @@ extension SearchViewController: UITableViewDataSource {
         switch section {
         case .suggestions:
             if shouldShowSuggestions {
-                return model.state.suggestions().count
+                return model.state.suggestions.count
             }
         case .movies:
             if !shouldShowSuggestions {
@@ -160,7 +160,7 @@ extension SearchViewController: UITableViewDataSource {
         switch section {
         case .suggestions:
             let cell = tableView.dequeueReusableCell(withIdentifier: Const.suggestionCellIdentifier, for: indexPath)
-            cell.textLabel?.text = model.state.suggestions()[indexPath.row]
+            cell.textLabel?.text = model.state.suggestions[indexPath.row]
             return cell
         case .movies:
             let cell = tableView.dequeueReusableCell(withIdentifier: MovieTableViewCell.reuseIdentifier, for: indexPath) as! MovieTableViewCell
@@ -209,7 +209,7 @@ extension SearchViewController: UITableViewDelegate {
         guard let section = SearchSection(rawValue: indexPath.section) else { fatalError("Undefined section index!") }
         switch section {
         case .suggestions:
-            let keyword = model.state.suggestions()[indexPath.row]
+            let keyword = model.state.suggestions[indexPath.row]
             searchBar.text = keyword
             startSearch(keyword)
         default:
